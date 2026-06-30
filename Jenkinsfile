@@ -1,8 +1,13 @@
 pipeline {
   agent any
 
+  tools {
+    nodejs 'NodeJS'
+  }
+
   environment {
     CI = 'true'
+    PLAYWRIGHT_BROWSERS_PATH = '0'
   }
 
   options {
@@ -46,9 +51,9 @@ pipeline {
       steps {
         script {
           if (isUnix()) {
-            sh 'npx playwright test --reporter=html --reporter=allure-playwright --reporter=junit'
+            sh 'npm run test:ci -- --reporter=html --reporter=allure-playwright --reporter=junit'
           } else {
-            bat 'npx playwright test --reporter=html --reporter=allure-playwright --reporter=junit'
+            bat 'npm run test:ci -- --reporter=html --reporter=allure-playwright --reporter=junit'
           }
         }
       }
