@@ -1,12 +1,14 @@
 export class HomePage {
 
-    constructor(page)
+ constructor(page)
     {
         this.page = page;
 
         this.framesLink = page.locator("a[href='/frames']");
         this.formAuthenticationLink = page.locator("a[href='/login']");
-this.windowsLink = page.locator("a[href='/windows']");    }
+this.windowsLink = page.locator("a[href='/windows']");   
+
+ }
 
     async navigate()
     {
