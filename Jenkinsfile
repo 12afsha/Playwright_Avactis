@@ -1,6 +1,7 @@
 pipeline {
   agent any
 
+
   tools {
     nodejs 'NodeJS'
   }
@@ -51,9 +52,21 @@ pipeline {
       steps {
         script {
           if (isUnix()) {
-            sh 'npm run test:ci -- --reporter=html --reporter=allure-playwright --reporter=junit'
+            sh 'npm run test:ci'
           } else {
-            bat 'npm run test:ci -- --reporter=html --reporter=allure-playwright --reporter=junit'
+            bat 'npm run test:ci'
+          }
+        }
+      }
+    }
+
+    stage('Generate Allure report') {
+      steps {
+        script {
+          if (isUnix()) {
+            sh 'npm run allure:generate'
+          } else {
+            bat 'npm run allure:generate'
           }
         }
       }
